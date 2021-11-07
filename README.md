@@ -1,4 +1,4 @@
-##Group Contract
+## Group Contract
 
 
 1.	Each member has responsibility to professionally work on assignments, and agrees to familiarize him- or her- self with the Student Code of Conduct.
