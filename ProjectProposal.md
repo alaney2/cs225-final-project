@@ -8,28 +8,29 @@ To collect the data, we plan to create a script to collect all the URLs on a web
 When collecting the data, we may run across pages that do not exist. In this case, we won’t count them as erroneous or any as a missing entry, but as “end-nodes” for our graph.
 
 ## Graph Algorithms
-Traversal - Depth First Search
+### Traversal - Depth First Search
 
-Algorithm #1: Dijkstra's Algorithm - shortest path
+### Algorithm #1: Dijkstra's Algorithm - shortest path
 
-Algorithm #2 : Tarjan's strongly connected components algorithm or Kosaraju-Sharir's algorithm
+### Algorithm #2 : Tarjan's strongly connected components algorithm or Kosaraju-Sharir's algorithm
 		We aim to have all algorithms run in at worst O(n2) time. 
 ## Timeline
-Mid-Project Check In (Nov 29th – Dec 1): Finish data collection and processing
 
-Week 1-2: Nov. 7th - Nov. 20th
+### Mid-Project Check In (Nov 29th – Dec 1): Finish data collection and processing
+
+### Week 1-2: Nov. 7th - Nov. 20th
 
 Collect the data outlined in point # 2
 
 Figure out how to process the data (i.e write some data processing class, possibly using an existing library)
 
-Week 3-4.5: Nov. 21st - Dec. 8th
+### Week 3-4.5: Nov. 21st - Dec. 8th
 
 Work on algorithms
 
-Finished all algorithms by December 8th
+Finish all algorithms by December 8th
 
-Until Due Date
+### Until Due Date
 
 Work on final project report
 
