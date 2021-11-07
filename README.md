@@ -35,6 +35,6 @@ A group member who is absent more than 2 times either in a class meeting or outs
 Each member has responsibility to professionally work on assignments, and agrees to familiarize themselves with the Student Code of Conduct.
 
 Signatures: 
-Alvin J. Zhang; Alan E. Yao; YouYou Yu
+Alvin J. Zhang; Alan E. Yao; YouYou Yu; Ben Clarage
 
 
