@@ -13,7 +13,7 @@ When collecting the data, we may run across pages that do not exist. In this cas
 ### Algorithm #1: Dijkstra's Algorithm - shortest path
 
 ### Algorithm #2 : Tarjan's strongly connected components algorithm or Kosaraju-Sharir's algorithm. 
-We aim to have all algorithms run in at worst O(n2) time. 
+We aim to have all algorithms run in at worst O(n^2) time. 
 ## Timeline
 
 ### Mid-Project Check In (Nov 29th – Dec 1): Finish data collection and processing
