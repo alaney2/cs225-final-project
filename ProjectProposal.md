@@ -17,7 +17,7 @@ A successful project will be if we can answer the above question with a finite e
 
 ## Graph Algorithms
 ### Traversal
-Depth First Search to visit all the nodes in our graph. The input to this algorithm will be our graph and the output of the traversal will be the number of nodes in the graph
+Depth First Search to visit all the nodes in our graph. The input to this algorithm will be our graph and the output of the traversal will be the number of nodes in the graph. The time complexity of this traversal is expected to be O(v), where v is the number of vertices in the graph.
 
 ### Algorithm #1
 Pagerank. We will implement the standard pagerank algorithm to determine which are the most important sites on the class webpage. The starting weights will be determined by the number of times a link appears on a given page. The runtime complexity should be O(v+e), where v and e are vertices and edges respectively. We will use this method to determine the steady state probability vector if you start on the main course homepage. The input will be our graph and the output will be the steady state starting from the main course page.
