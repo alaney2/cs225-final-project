@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <map>
 using namespace std;
 
 class Graph{
@@ -12,24 +13,29 @@ class Graph{
         string line;
         ifstream file(filename);
         string url = "";
+        bool flag = 1;
         if (file.is_open()){
             while ( getline (file,line) ){
-                Node* node = new Node;
                 int counter = 1;
-                bool flag = 1;
+                
+                string vertex = "";
+                vector<string> neighbors;
+                neighbors.clear();
                 for(char &c : line){
-                    if(c == ' ' && counter == 1){   //base url
+                    if(c == ' ' && counter == 1){   //vertex url
                         url.pop_back();
-                        node->url_ = url;
+                        vertex = url;
+                        nodes[vertex] = neighbors;
                         url = "";
                         counter --;
                         if(flag){
-                            basenode = node;
+                            root = vertex;
+                            flag = false;
                         }
                     }
-                    else if( c == ' '){
+                    else if( c == ' '){ //neighbors url
                         url.pop_back();
-                        node->neighbors_.push_back(url);
+                        nodes[vertex].push_back(url);
                         url = "";   
                     }
                     else{
@@ -43,15 +49,17 @@ class Graph{
             cout << "Could not open file."<<endl;
         }
     }
-    void printGraph(){
-        queue<Node*> nei;
-
-    }
+    string getRoot(){ return root; }
+    vector<string> getNeighbor(string vertex){ return nodes[vertex]; }
     
     private:
-        struct Node{
-            string url_;
-            vector<Node*> neighbors_;
-        };
-        Node* basenode;
+        // struct Node{
+        //     string url_;
+        //     vector<Node*> neighbors_;
+        // };
+        // Node* basenode_;
+        // vector<Node*> vertices_;
+        map<string, vector<string>> nodes;
+        string root;
+        
 };
