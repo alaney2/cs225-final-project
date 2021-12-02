@@ -17,15 +17,13 @@ A successful project will be if we can answer the above question with a finite e
 
 ## Graph Algorithms
 ### Traversal
-Depth First Search to visit all the nodes in our graph. 
+Depth First Search to visit all the nodes in our graph. The input to this algorithm will be our graph and the output of the traversal will be the number of nodes in the graph
 
 ### Algorithm #1
-Kirchhoff's Theorem to find the number of spanning trees in the graph. The input would be a graph, and the output would be a number that shows how many spanning trees there are in the input graph. The expected runtime is O(v) for a complete graph, and O(v^3) for a not complete graph. 
+Pagerank. We will implement the standard pagerank algorithm to determine which are the most important sites on the class webpage. The starting weights will be determined by the number of times a link appears on a given page. The runtime complexity should be O(v+e), where v and e are vertices and edges respectively. We will use this method to determine the steady state probability vector if you start on the main course homepage. The input will be our graph and the output will be the steady state starting from the main course page.
 
 ### Algorithm #2
-Tarjan's strongly connected components algorithm or Kosaraju-Sharir's algorithm to find strongly connected components. Our input to this algorithm will be a series of nodes (URLs) and the output will be whether it is a strongly connected component or not. We expect the runtime of this algorithm to be linear (O(v+e)), where v and e are vertices and edges respectively.
-We aim to have all algorithms run in at worst O(n2) time, for both Dijkstra’s Algorithm as well as Tarjan’s strongly connected components algorithm or 
-Kosaraju-Sharir’s algorithm.
+Algorithm #2 : Tarjan's strongly connected components algorithm. Our input to this algorithm will be our graph of the cs225 website and the output will be the sizes of the strongly connected components of the site and a representative from that component. We expect the runtime of this algorithm to be O(v+e), where v and e are vertices and edges respectively.
 
 ## Timeline
 
