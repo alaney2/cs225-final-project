@@ -1,4 +1,4 @@
-#include "Graph.cpp"
+#include "src/graph.cpp"
 
 int main(){
     Graph g = Graph("data1.txt");
@@ -21,5 +21,4 @@ int main(){
         cout << endl;
     }
     return 1;
-
 }

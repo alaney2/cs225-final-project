@@ -1,0 +1,10 @@
+# Use the Google style in this project.
+BasedOnStyle: Google
+
+# Makes "int& foo" the standard instead of "int &foo"
+# Google Style Guide only states we need to be consistent within a project
+
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+CommentPragmas: '(@copydoc)'
