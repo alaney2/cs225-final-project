@@ -4,12 +4,12 @@
 #pragma once
 
 #include <string>
-#include <vector>
 #include <unordered_map>
+#include <vector>
 
+using std::string;
 using std::unordered_map;
 using std::vector;
-using std::string;
 
 class Graph {
  public:
@@ -18,13 +18,13 @@ class Graph {
   
   string getRoot();
   vector<string> getNeighbor(const string& vertex);
-  
+
   void setRoot(const string& new_root);
   void printInfo();
 
  private:
   unordered_map<string, vector<string>> nodes;
   string root;
-  
+
   void addFileInfoToGraph(const string& filename);
 };

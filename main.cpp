@@ -6,14 +6,14 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   vector<string> data_files = {"data1.txt", "data2.txt"};
-  
+
   Graph g = Graph(data_files);
   g.setRoot("https://courses.engr.illinois.edu/cs225/fa2021");
-  
-//  g.printInfo();
-  
+
+  //  g.printInfo();
+
   string root = g.getRoot();
   cout << "root-- " << root << endl;
   vector<string> n = g.getNeighbor(root);
@@ -22,8 +22,9 @@ int main(int argc, char *argv[]) {
   }
   cout << endl << endl;
 
-  //Error in current parser: main nodes don't include end slash but in the neighbor list they do
-  
+  // Error in current parser: main nodes don't include end slash but in the
+  // neighbor list they do
+
   while (true) {
     string search = "";
     cout << "Enter new url: " << endl;
