@@ -5,20 +5,26 @@
 
 #include <string>
 #include <vector>
-#include <map>
+#include <unordered_map>
 
-using std::map;
+using std::unordered_map;
 using std::vector;
 using std::string;
 
 class Graph {
  public:
-  Graph(string filename);
+  explicit Graph(const string& filename);
+  explicit Graph(const vector<string>& filenames);
   
   string getRoot();
-  vector<string> getNeighbor(string vertex);
+  vector<string> getNeighbor(const string& vertex);
+  
+  void setRoot(const string& new_root);
+  void printInfo();
 
  private:
-  map<string, vector<string>> nodes;
+  unordered_map<string, vector<string>> nodes;
   string root;
+  
+  void addFileInfoToGraph(const string& filename);
 };

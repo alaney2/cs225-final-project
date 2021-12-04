@@ -8,11 +8,19 @@ using std::cout;
 using std::endl;
 using std::ifstream;
 
-Graph::Graph(string filename) {
+Graph::Graph(const string& filename) { addFileInfoToGraph(filename); }
+
+Graph::Graph(const vector<string>& filenames) {
+  for (const string& filename : filenames) {
+    addFileInfoToGraph(filename);
+  }
+}
+
+void Graph::addFileInfoToGraph(const string& filename) {
   string line;
   ifstream file(filename);
   string url = "";
-  bool flag = 1;
+  bool flag = true;
   if (file.is_open()) {
     while (getline(file, line)) {
       int counter = 1;
@@ -42,8 +50,19 @@ Graph::Graph(string filename) {
     }
     file.close();
   } else {
-    cout << "Could not open file." << endl;
+    cout << "Could not open file: " << filename << endl;
   }
 }
+
 string Graph::getRoot() { return root; }
-vector<string> Graph::getNeighbor(string vertex) { return nodes[vertex]; }
+vector<string> Graph::getNeighbor(const string& vertex) {
+  return nodes[vertex];
+}
+
+void Graph::printInfo() {
+  for (auto const& x : nodes) {
+    cout << x.first << ": " << x.second.size() << endl;
+  }
+  cout << "Total Nodes: " << nodes.size() << endl;
+}
+void Graph::setRoot(const string& new_root) { root = new_root; }
