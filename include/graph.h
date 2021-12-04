@@ -3,3 +3,22 @@
 //
 #pragma once
 
+#include <string>
+#include <vector>
+#include <map>
+
+using std::map;
+using std::vector;
+using std::string;
+
+class Graph {
+ public:
+  Graph(string filename);
+  
+  string getRoot();
+  vector<string> getNeighbor(string vertex);
+
+ private:
+  map<string, vector<string>> nodes;
+  string root;
+};
