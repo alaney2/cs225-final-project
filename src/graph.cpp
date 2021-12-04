@@ -14,43 +14,43 @@ class Graph{
         ifstream file(filename);
         string url = "";
         bool flag = 1;
-        if (file.is_open()){
-            while ( getline (file,line) ){
+        if (file.is_open()) {
+            while (getline (file,line)) {
                 int counter = 1;
                 
                 string vertex = "";
                 vector<string> neighbors;
                 neighbors.clear();
-                for(char &c : line){
-                    if(c == ' ' && counter == 1){   //vertex url
+                for (char &c : line) {
+                    if (c == ' ' && counter == 1) {   //vertex url
                         url.pop_back();
                         vertex = url;
                         nodes[vertex] = neighbors;
                         url = "";
-                        counter --;
-                        if(flag){
+                        counter--;
+                        if (flag) {
                             root = vertex;
                             flag = false;
                         }
                     }
-                    else if( c == ' '){ //neighbors url
+                    else if ( c == ' ') { //neighbors url
                         url.pop_back();
                         nodes[vertex].push_back(url);
                         url = "";   
                     }
-                    else{
+                    else {
                         url += c;
                     }
                 }
             }
             file.close();
         }
-        else{
+        else {
             cout << "Could not open file."<<endl;
         }
     }
-    string getRoot(){ return root; }
-    vector<string> getNeighbor(string vertex){ return nodes[vertex]; }
+    string getRoot() { return root; }
+    vector<string> getNeighbor(string vertex) { return nodes[vertex]; }
     
     private:
         // struct Node{
