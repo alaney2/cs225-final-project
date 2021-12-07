@@ -14,27 +14,30 @@ int main(int argc, char* argv[]) {
 
   //  g.printInfo();
 
-  string root = g.getRoot();
-  cout << "root-- " << root << endl;
-  vector<string> n = g.getNeighbor(root);
-  for (const auto& i : n) {
-    cout << i << " || ";
-  }
-  cout << endl << endl;
+  // string root = g.getRoot();
+  // cout << "root-- " << root << endl;
+  // vector<string> n = g.getNeighbor(root);
+  // for (const auto& i : n) {
+  //   cout << i << " || ";
+  // }
+  // cout << endl << endl;
 
   // Error in current parser: main nodes don't include end slash but in the
   // neighbor list they do
 
-  while (true) {
-    string search = "";
-    cout << "Enter new url: " << endl;
-    cin >> search;
-    cout << "Your Search: " << search << endl;
-    vector<string> n2 = g.getNeighbor(search);
-    for (auto i : n2) {
-      cout << i << " || ";
-    }
-    cout << endl;
-  }
+  // while (true) {
+  //   string search = "";
+  //   cout << "Enter new url: " << endl;
+  //   cin >> search;
+  //   cout << "Your Search: " << search << endl;
+  //   vector<string> n2 = g.getNeighbor(search);
+  //   for (auto i : n2) {
+  //     cout << i << " || ";
+  //   }
+  //   cout << endl;
+  // }
+  Graph g1 = Graph("test.txt");
+  g1.dfs();
+
   return 0;
 }

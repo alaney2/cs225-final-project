@@ -17,6 +17,12 @@ Makefile, test cases: catch
 
 ## Dec 6-12:
 DFS Traversal
+- Implemented the DFS traversal using a stack. Manually added the base URL, then had a while loop that ran on the condition that
+the stack is not empty. We have a "visited" map of URLs to booleans, all of which are initially false, and are marked true when
+encountered in the while loop. If a URL in the neighbors already has been visited, it is not added to the stack. Whenever 
+we process a node, we concatenate it to an output string, and it is printed out. In the future, we may implement saving of this
+string into a file. 
+- Also modified the parser to get rid of the character '/' at the end of URLs. 
 
 Page-Rank Algorithm
 

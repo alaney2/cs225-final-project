@@ -6,10 +6,12 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <stack>
 
 using std::string;
 using std::unordered_map;
 using std::vector;
+using std::stack;
 
 class Graph {
  public:
@@ -21,6 +23,7 @@ class Graph {
 
   void setRoot(const string& new_root);
   void printInfo();
+  void dfs(); 
 
  private:
   unordered_map<string, vector<string>> nodes;

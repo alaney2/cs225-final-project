@@ -31,6 +31,8 @@ void Graph::addFileInfoToGraph(const string& filename) {
       for (char& c : line) {
         if (c == ' ' && counter == 1) {  // vertex url
           url.pop_back();
+          if(url.back() == '/')
+            url.pop_back();
           vertex = url;
           nodes[vertex] = neighbors;
           url = "";
@@ -41,6 +43,8 @@ void Graph::addFileInfoToGraph(const string& filename) {
           }
         } else if (c == ' ') {  // neighbors url
           url.pop_back();
+          if(url.back() == '/')
+            url.pop_back();
           nodes[vertex].push_back(url);
           url = "";
         } else {
@@ -66,3 +70,30 @@ void Graph::printInfo() {
   cout << "Total Nodes: " << nodes.size() << endl;
 }
 void Graph::setRoot(const string& new_root) { root = new_root; }
+
+
+void Graph::dfs(){
+  unordered_map<string, bool> visited;
+  stack<string> s;
+  string longassstring = "";
+  for(auto &x : nodes){
+    visited[x.first] = false;
+  }
+  s.push(root);
+  visited[root] = true;
+  while(!s.empty()){
+    string curr = s.top();
+    s.pop();
+    visited[curr] = true;
+    longassstring += curr;
+    longassstring += '\n';
+    for(auto const &n : nodes[curr]){
+      if(!visited[n])
+        s.push(n);
+
+    }
+  }
+
+  cout << longassstring << endl;
+
+}
