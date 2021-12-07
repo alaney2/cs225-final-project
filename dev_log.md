@@ -17,5 +17,7 @@ Makefile, test cases: catch
 
 ## Dec 6-12:
 DFS Traversal
+
 Page-Rank Algorithm
+
 Tarjan's Algorithm
