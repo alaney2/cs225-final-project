@@ -66,7 +66,6 @@ TEST_CASE("Parser Tests") {
     REQUIRE(nodes.find("outlook.com") != nodes.end());
     REQUIRE(nodes.find("microsoft.com") != nodes.end());
     REQUIRE(nodes.find("netflix.com") != nodes.end());
-    
   }
 
   SECTION("Stores Neighbors Correctly") {
@@ -145,9 +144,9 @@ TEST_CASE("DFS Across Multiple Files") {
   SECTION("Root at most connected node") {
     g.setRoot("google.com");
     auto res = g.dfs();
-    REQUIRE(res.size() == 11);
+    REQUIRE(res.size() == 10);
   }
-  
+
   SECTION("Root at a middle node") {
     g.setRoot("azure.com");
     auto res = g.dfs();
@@ -161,3 +160,75 @@ TEST_CASE("DFS Across Multiple Files") {
   }
 }
 
+TEST_CASE("Page Tests") {
+  Graph graph("tests/test_data/test_data5.txt");
+  graph.setRoot("google.com");
+  int a = graph.getIndexFromUrl("amazon.com");
+  int g = graph.getIndexFromUrl("google.com");
+  int f = graph.getIndexFromUrl("facebook.com");
+  int y = graph.getIndexFromUrl("youtube.com");
+  int t = graph.getIndexFromUrl("twitter.com");
+  int w = graph.getIndexFromUrl("wikipedia.com");
+  SECTION("Adjacency Test") {
+    const auto& matrix = graph.genAdjacency();
+
+    // matrix[j, i] means from i to j
+    REQUIRE(matrix[y][g] == 1);
+    REQUIRE(matrix[f][g] == 1);
+
+    REQUIRE(matrix[w][f] == 1);
+    REQUIRE(matrix[w][f] == 1);
+
+    REQUIRE(matrix[w][a] == 1);
+    REQUIRE(matrix[t][a] == 1);
+    REQUIRE(matrix[y][a] == 1);
+
+    REQUIRE(matrix[g][w] == 1);
+
+    REQUIRE(matrix[y][t] == 1);
+
+    REQUIRE(matrix[g][y] == 1);
+  }
+
+  SECTION("Weight Adjust Matrix") {
+    const auto& matrix = graph.genPageRankMatrix(graph.genAdjacency());
+    REQUIRE(matrix[y][g] == 0.5);
+    REQUIRE(matrix[f][g] == 0.5);
+
+    REQUIRE(matrix[w][f] == 0.5);
+    REQUIRE(matrix[w][f] == 0.5);
+
+    REQUIRE(matrix[w][a] == Approx(0.33333).epsilon(0.001f));
+    REQUIRE(matrix[t][a] == Approx(0.33333).epsilon(0.001f));
+    REQUIRE(matrix[y][a] == Approx(0.33333).epsilon(0.001f));
+
+    REQUIRE(matrix[g][w] == 1);
+
+    REQUIRE(matrix[y][t] == 1);
+
+    REQUIRE(matrix[g][y] == 1);
+  }
+
+  SECTION("Multiplying Matrix and Vector") {
+    vector<vector<double>> m = {{0.7, 0.8}, {0.9, 0.2}};
+    vector<double> v = {0.2, 0.5};
+    const auto& res = graph.multMatrixWithVector(m, v);
+    REQUIRE(res[0] == 0.7 * 0.2 + 0.8 * 0.5);
+    REQUIRE(res[1] == 0.9 * 0.2 + 0.2 * 0.5);
+  }
+
+  // in this test the start location does not matter since the steady
+  // state should always end up being the same
+  SECTION("All Page Rank Together") {
+    for (const auto& possible_root : graph.getNodes()) {
+      graph.setRoot(possible_root.first);
+      const auto& res = graph.pageRank();
+      REQUIRE(res[0] == "google.com");
+      REQUIRE(res[1] == "youtube.com");
+      REQUIRE(res[2] == "facebook.com");
+      REQUIRE(res[3] == "wikipedia.com");
+      REQUIRE(res[4] == "amazon.com");
+      REQUIRE(res[5] == "twitter.com");
+    }
+  }
+}

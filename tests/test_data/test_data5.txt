@@ -1,0 +1,6 @@
+google.com: facebook.com, youtube.com, 
+facebook.com: wikipedia.com, amazon.com, 
+amazon.com: wikipedia.com, twitter.com, youtube.com, 
+wikipedia.com: google.com, 
+twitter.com: youtube.com, 
+youtube.com: google.com, 

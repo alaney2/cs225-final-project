@@ -13,7 +13,11 @@ int main(int argc, char* argv[]) {
   g.setRoot("https://courses.engr.illinois.edu/cs225/fa2021");
 //  auto res = g.dfs();
 //  cout << res.size() << endl;
-  //  g.printInfo();
+  const auto& page_rank_res = g.pageRank();
+  for (size_t i = 0; i < 50; ++i) {
+    cout << page_rank_res[i] << ", ";
+  }
+  cout << endl;
 
   // string root = g.getRoot();
   // cout << "root-- " << root << endl;
