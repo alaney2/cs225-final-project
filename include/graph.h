@@ -3,36 +3,40 @@
 //
 #pragma once
 
+#include <stack>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
-#include <stack>
 
+using std::stack;
 using std::string;
 using std::unordered_map;
+using std::unordered_set;
 using std::vector;
-using std::stack;
 
 class Graph {
  public:
   explicit Graph(const string& filename);
   explicit Graph(const vector<string>& filenames);
-  
+
   string getRoot();
   vector<string> getNeighbor(const string& vertex);
   const unordered_map<string, vector<string>>& getNodes();
-  
+
   void setRoot(const string& new_root);
   void printInfo();
-  void dfs();
+  vector<string> dfs();
   void pageRank();
 
  private:
-  unordered_map<string, vector<string>> nodes;
-  string root;
+  unordered_map<string, vector<string>> nodes_;
+  unordered_set<string> all_nodes_;
+  unordered_map<string, int> urlToIndex_;
+  string root_;
 
   void addFileInfoToGraph(const string& filename);
-  
+
   static vector<string> split(const string& to_split, const string& del);
-  static void smart_trim(vector<string>& to_trim);
+  static void smartTrim(vector<string>& to_trim);
 };

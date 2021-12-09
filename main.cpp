@@ -11,7 +11,8 @@ int main(int argc, char* argv[]) {
 
   Graph g = Graph(data_files);
   g.setRoot("https://courses.engr.illinois.edu/cs225/fa2021");
-
+//  auto res = g.dfs();
+//  cout << res.size() << endl;
   //  g.printInfo();
 
   // string root = g.getRoot();

@@ -59,9 +59,14 @@ TEST_CASE("Parser Tests") {
     Graph g(data_files);
     const auto& nodes = g.getNodes();
 
-    REQUIRE(nodes.size() == 2);
+    REQUIRE(nodes.size() == 6);
     REQUIRE(nodes.find("google.com") != nodes.end());
     REQUIRE(nodes.find("gmail.com") != nodes.end());
+    REQUIRE(nodes.find("illinois.edu") != nodes.end());
+    REQUIRE(nodes.find("outlook.com") != nodes.end());
+    REQUIRE(nodes.find("microsoft.com") != nodes.end());
+    REQUIRE(nodes.find("netflix.com") != nodes.end());
+    
   }
 
   SECTION("Stores Neighbors Correctly") {
@@ -100,7 +105,6 @@ TEST_CASE("Parser Tests") {
     SECTION("Trim from neighbor nodes") {
       const auto& n = nodes.find("https://outlook.office.com")->second;
       REQUIRE(n.size() == 2);
-      g.printInfo();
 
       REQUIRE(find(n.begin(), n.end(), "https://outlook.com//") == n.end());
       REQUIRE(find(n.begin(), n.end(), "hololens.com/") == n.end());
@@ -110,3 +114,50 @@ TEST_CASE("Parser Tests") {
     }
   }
 }
+
+TEST_CASE("DFS Simple") {
+  Graph g("tests/test_data/test_data1.txt");
+
+  SECTION("Root at most connected node") {
+    g.setRoot("google.com");
+    auto res = g.dfs();
+    REQUIRE(res.size() == 6);
+  }
+
+  SECTION("Root at middle node") {
+    g.setRoot("gmail.com");
+    auto res = g.dfs();
+    REQUIRE(res.size() == 4);
+  }
+
+  SECTION("Root at edge node") {
+    g.setRoot("netflix.com");
+    auto res = g.dfs();
+    REQUIRE(res.size() == 1);
+  }
+}
+
+TEST_CASE("DFS Across Multiple Files") {
+  vector<string> data_files = {
+      "tests/test_data/test_data1.txt", "tests/test_data/test_data2.txt",
+      "tests/test_data/test_data3.txt", "tests/test_data/test_data4.txt"};
+  Graph g(data_files);
+  SECTION("Root at most connected node") {
+    g.setRoot("google.com");
+    auto res = g.dfs();
+    REQUIRE(res.size() == 11);
+  }
+  
+  SECTION("Root at a middle node") {
+    g.setRoot("azure.com");
+    auto res = g.dfs();
+    REQUIRE(res.size() == 6);
+  }
+
+  SECTION("Root at edge node") {
+    g.setRoot("netflix.com");
+    auto res = g.dfs();
+    REQUIRE(res.size() == 1);
+  }
+}
+

@@ -14,7 +14,7 @@ LD = clang++
 
 DEPFILE_FLAGS = -MMD -MP
 WARNINGS = -pedantic -Wall -Werror -Wfatal-errors -Wextra -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function
-CXXFLAGS += -std=c++14 -stdlib=libc++ -O3 $(WARNINGS) $(DEPFILE_FLAGS) -g -c
+CXXFLAGS += -std=c++14 -stdlib=libc++ -O0 $(WARNINGS) $(DEPFILE_FLAGS) -g -c
 LDFLAGS += -std=c++14 -stdlib=libc++ -lc++abi
 
 all: $(EXE)

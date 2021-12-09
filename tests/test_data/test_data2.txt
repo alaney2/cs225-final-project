@@ -1,2 +1,2 @@
 outlook.com: teams.com, azure.com, 
-azure.com: github.com, microsoft.com, 
+azure.com: github.com, microsoft.com, outlook.com, 

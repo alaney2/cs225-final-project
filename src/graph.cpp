@@ -2,17 +2,30 @@
 
 #include <fstream>
 #include <iostream>
+#include <unordered_set>
 #include <vector>
 
 using std::cout;
 using std::endl;
 using std::ifstream;
+using std::unordered_set;
 
-Graph::Graph(const string& filename) { addFileInfoToGraph(filename); }
+Graph::Graph(const string& filename) : Graph(vector<string>{filename}) {}
 
 Graph::Graph(const vector<string>& filenames) {
   for (const string& filename : filenames) {
     addFileInfoToGraph(filename);
+  }
+  int idx = 0;
+  for (auto const& x : all_nodes_) {
+    urlToIndex_[x] = idx;
+    ++idx;
+    if (nodes_.find(x) == nodes_.end()) {
+      nodes_[x] = vector<string>(0);
+    }
+  }
+  if (!all_nodes_.empty()) {
+    root_ = nodes_.begin()->first;
   }
 }
 
@@ -23,11 +36,15 @@ void Graph::addFileInfoToGraph(const string& filename) {
   if (file.is_open()) {
     while (getline(file, line)) {
       vector<string> main_info = split(line, ": ");
-      smart_trim(main_info);
+      smartTrim(main_info);
       vector<string> neighbors = split(main_info[1], ", ");
-      smart_trim(neighbors);
-
-      nodes[main_info[0]] = neighbors;
+      smartTrim(neighbors);
+      
+      all_nodes_.insert(main_info[0]);
+      for (const auto& s : neighbors) {
+        all_nodes_.insert(s);
+      }
+      nodes_[main_info[0]] = neighbors;
     }
     file.close();
   } else {
@@ -35,7 +52,7 @@ void Graph::addFileInfoToGraph(const string& filename) {
   }
 }
 
-void Graph::smart_trim(vector<string>& to_trim) {
+void Graph::smartTrim(vector<string>& to_trim) {
   for (string& s : to_trim) {
     s.erase(0, s.find_first_not_of(",/\\\t\n\v\f\r "));  // left trim
     s.erase(s.find_last_not_of(",/\\\t\n\v\f\r ") + 1);  // right trim
@@ -57,66 +74,64 @@ vector<string> Graph::split(const string& to_split, const string& del) {
   return to_return;
 }
 
-string Graph::getRoot() { return root; }
+string Graph::getRoot() { return root_; }
 vector<string> Graph::getNeighbor(const string& vertex) {
-  return nodes[vertex];
+  return nodes_[vertex];
 }
 
 void Graph::printInfo() {
-  for (auto const& x : nodes) {
+  for (auto const& x : nodes_) {
     cout << x.first << ": " << x.second.size() << endl;
     for (auto const& y : x.second) {
       cout << "\t" << y << endl;
     }
   }
-  cout << "Total Nodes: " << nodes.size() << endl;
+  cout << "Total Nodes_: " << nodes_.size() << endl;
 }
-void Graph::setRoot(const string& new_root) { root = new_root; }
+void Graph::setRoot(const string& new_root_) { root_ = new_root_; }
 
-void Graph::dfs() {
-  unordered_map<string, bool> visited;
+vector<string> Graph::dfs() {
+  vector<bool> visited(all_nodes_.size(), false);
+
   stack<string> s;
-  string longassstring = "";
-  for (auto& x : nodes) {
-    visited[x.first] = false;
-  }
-  s.push(root);
-  visited[root] = true;
+  s.push(root_);
+
+  vector<string> to_return;
+  visited[urlToIndex_[root_]] = true;
+
   while (!s.empty()) {
     string curr = s.top();
+    to_return.push_back(curr);
     s.pop();
-    visited[curr] = true;
-    longassstring += curr;
-    longassstring += '\n';
-    for (auto const& n : nodes[curr]) {
-      if (!visited[n]) s.push(n);
+    visited[urlToIndex_[curr]] = true;
+
+    for (auto const& n : nodes_[curr]) {
+      if (!visited[urlToIndex_[n]]) {
+        s.push(n);
+      }
     }
   }
-  cout << longassstring << endl;
+  
+  return to_return;
 }
 
 void Graph::pageRank() {
-  size_t n = nodes.size();
+  size_t n = nodes_.size();
   // Creates a 2D vector of size n filled with 0s
   vector<vector<double>> matrix(n, vector<double>(n, 0));
 
-  unordered_map<string, int> urlToIndex;
-  int idx = 0;
-  // C++11+
-  for (auto const& x : nodes) {
-    string url = x.first;
-    urlToIndex[url] = idx;
-    ++idx;
-  }
   // Constructs the adjacency matrix
-  for (auto const& x : nodes) {
+  for (auto const& x : nodes_) {
     auto url = x.first;
     auto connections = x.second;
-    int i = urlToIndex[url];
+    int i = urlToIndex_[url];
     for (const auto& connection : connections) {
-      int j = urlToIndex[connection];
+      int j = urlToIndex_[connection];
       matrix[j][i] = 1;
     }
   }
 }
-const unordered_map<string, vector<string>>& Graph::getNodes() { return nodes; }
+
+const unordered_map<string, vector<string>>& Graph::getNodes() {
+  return nodes_;
+}
