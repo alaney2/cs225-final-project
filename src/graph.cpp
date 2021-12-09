@@ -107,7 +107,7 @@ void Graph::pageRank() {
     urlToIndex[url] = idx;
     ++idx;
   }
-  // Each column is a url and a 1 means it is connected to another url at the row index
+  // Constructs the adjacency matrix
   for (auto const& x : nodes) {
     string url = x.first;
     string connections = x.second;
