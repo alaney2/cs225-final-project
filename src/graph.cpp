@@ -72,28 +72,49 @@ void Graph::printInfo() {
 void Graph::setRoot(const string& new_root) { root = new_root; }
 
 
-void Graph::dfs(){
+void Graph::dfs() {
   unordered_map<string, bool> visited;
   stack<string> s;
   string longassstring = "";
-  for(auto &x : nodes){
+  for (auto &x : nodes) {
     visited[x.first] = false;
   }
   s.push(root);
   visited[root] = true;
-  while(!s.empty()){
+  while (!s.empty()) {
     string curr = s.top();
     s.pop();
     visited[curr] = true;
     longassstring += curr;
     longassstring += '\n';
-    for(auto const &n : nodes[curr]){
-      if(!visited[n])
-        s.push(n);
-
+    for (auto const &n : nodes[curr]) {
+      if(!visited[n]) s.push(n);
     }
   }
-
   cout << longassstring << endl;
+}
 
+void Graph::pageRank() {
+  int n = nodes.size();
+  // Creates a 2D vector of size n filled with 0s
+  vector<vector<double>> matrix(n, vector<double> (n, 0));
+
+  unordered_map<string, int> urlToIndex;
+  int idx = 0;
+  // C++11+
+  for (auto const& x : nodes) {
+    string url = x.first;
+    urlToIndex[url] = idx;
+    ++idx;
+  }
+  // Each column is a url and a 1 means it is connected to another url at the row index
+  for (auto const& x : nodes) {
+    string url = x.first;
+    string connections = x.second;
+    int i = urlToIndex[url];
+    for (string connection : connections) {
+      int j = urlToIndex[connection];
+      matrix[j][i] = 1;
+    }
+  }
 }

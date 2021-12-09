@@ -23,7 +23,8 @@ class Graph {
 
   void setRoot(const string& new_root);
   void printInfo();
-  void dfs(); 
+  void dfs();
+  void pageRank();
 
  private:
   unordered_map<string, vector<string>> nodes;
