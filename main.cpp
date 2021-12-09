@@ -36,8 +36,8 @@ int main(int argc, char* argv[]) {
   //   }
   //   cout << endl;
   // }
-  Graph g1 = Graph("test.txt");
-  g1.dfs();
+//  Graph g1 = Graph("test.txt");
+//  g1.dfs();
 
   return 0;
 }

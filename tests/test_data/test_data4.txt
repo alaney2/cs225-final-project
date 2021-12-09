@@ -1,0 +1,3 @@
+microsoft.com: outlook.com, office.com, 
+https://outlook.office.com/: https://outlook.com//, hololens.com/, 
+https://outlook.com//: 

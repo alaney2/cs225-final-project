@@ -20,7 +20,8 @@ class Graph {
   
   string getRoot();
   vector<string> getNeighbor(const string& vertex);
-
+  const unordered_map<string, vector<string>>& getNodes();
+  
   void setRoot(const string& new_root);
   void printInfo();
   void dfs();
@@ -31,4 +32,7 @@ class Graph {
   string root;
 
   void addFileInfoToGraph(const string& filename);
+  
+  static vector<string> split(const string& to_split, const string& del);
+  static void smart_trim(vector<string>& to_trim);
 };
