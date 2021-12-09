@@ -34,7 +34,7 @@ Implement graph class - data processing Makefile, test cases: catch
 #### Project Structure
 
 - Parser (and helper function) Tests
-- Rewrote Parser
+- Rewrote Parser, there was an error with dealing with urls that had spaces, /, or \ at the front or back.
 - MakeFile Adjustments
 
 #### DFS Traversal
@@ -49,7 +49,7 @@ Implement graph class - data processing Makefile, test cases: catch
 
 - Implemented Standard PageRank. Calculate Adjacency Matrix, calculate standard pagerank matrix, create a starting state
   vector based on either current root or passed start node. Terminate steady state vector after 50 iterations, which
-  should be plenty of iterations to each a steady state. In the future might adjust this so that we terminate when the
+  should be plenty of iterations to reach a steady state. In the future might adjust this so that we terminate when the
   k-norm difference of the current vector with the previous vector is less than some bound.
 
 #### Tarjan's Algorithm
