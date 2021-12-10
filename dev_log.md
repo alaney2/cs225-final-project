@@ -42,8 +42,8 @@ Implement graph class - data processing Makefile, test cases: catch
 - Implemented the DFS traversal using a stack. Manually added the base URL, then had a while loop that ran on the
   condition that the stack is not empty. We have a "visited" vector booleans corresponding to urls, all of which are
   initially false, and are marked true when encountered in the while loop. If a URL in the neighbors already has been
-  visited, it is not added to the stack. Whenever we process a node, we append it to the end of a vector. In the future,
-  we may implement saving of this vector into a file.
+  visited, it is not added to the stack. Whenever we process a node, we append it to the end of a string. In the future,
+  we may implement saving of this string into a file.
 
 #### Page-Rank Algorithm
 
