@@ -235,9 +235,14 @@ TEST_CASE("Page Tests") {
 }
 
 TEST_CASE("tarjan") {
-  Graph graph("tests/test_data/test_data5.txt");
-  graph.setRoot("google.com");
-  graph.printInfo();
+  //  Graph graph("tests/test_data/test_data5.txt");
+  //  graph.setRoot("google.com");
+  //  graph.printInfo();
+  //
+  vector<string> data_files = {"data1.txt", "data2.txt"};
+
+  Graph graph = Graph(data_files);
+  graph.setRoot("https://courses.engr.illinois.edu/cs225/fa2021");
   const auto& res = graph.tarjan();
   for (const auto& v : res) {
     std::cout << "Component: " << std::endl;
