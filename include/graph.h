@@ -3,19 +3,19 @@
 //
 #pragma once
 
+#include <set>
 #include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <set>
 
+using std::set;
 using std::stack;
 using std::string;
 using std::unordered_map;
 using std::unordered_set;
 using std::vector;
-using std::set;
 
 class Graph {
  public:
@@ -63,7 +63,7 @@ class Graph {
    * Prints formatted information about the entire current graph.
    */
   void printInfo();
-  
+
   /**
    * Traverse the graph starting from the current root
    * @return vector of strings of the order the nodes the graph was traversed in
@@ -121,30 +121,29 @@ class Graph {
    */
   static vector<double> multMatrixWithVector(const vector<vector<double>>& m,
                                              const vector<double>& v);
-  
+
   /**
-   * 
+   * Runs Tarjan's strongly connected components algorithm and
+   * runs modified dfs at every node that hasn't been traversed
    * @return set of strongly connected components (sets of vertices)
    */
   set<vector<string>> tarjan();
-  
+
   /**
    * Set the depth index for node to the smallest unused index
-   * @param node 
+   * @param node
    * @param index node index
    * @param index_map map of nodes to their indices
-   * @param low_link_map map of nodes to the smallest index of any node reachable from that node
+   * @param low_link_map map of nodes to the smallest index of any node
+   * reachable from that node
    * @param on_stack keeps track of if nodes have been added to the stack
    * @param stack stack of nodes to visit
    */
-  void strongConnect(const string& node,
-                     size_t& index,
+  void strongConnect(const string& node, size_t& index,
                      unordered_map<string, size_t>& index_map,
                      unordered_map<string, size_t>& low_link_map,
                      unordered_map<string, bool>& on_stack,
-                     stack<string>& stack,
-                     set<vector<string>>& res);
-  
+                     stack<string>& stack, set<vector<string>>& res);
 
  private:
   /**

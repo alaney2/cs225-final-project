@@ -38,42 +38,39 @@ set<vector<string>> Graph::tarjan() {
   unordered_map<string, size_t> index_map;
   unordered_map<string, size_t> low_link_map;
   unordered_map<string, bool> on_stack;
-//  
   set<vector<string>> res;
-//  
   stack<string> s;
-  
+
   for (const auto& node : all_nodes_) {
     if (index_map.find(node) == index_map.end()) {
       strongConnect(node, index, index_map, low_link_map, on_stack, s, res);
     }
   }
-  
+
   return res;
 }
 
-void Graph::strongConnect(const string& node,
-                          size_t& index,
+void Graph::strongConnect(const string& node, size_t& index,
                           unordered_map<string, size_t>& index_map,
                           unordered_map<string, size_t>& low_link_map,
                           unordered_map<string, bool>& on_stack,
-                          stack<string>& stack,
-                          set<vector<string>>& res) {
+                          stack<string>& stack, set<vector<string>>& res) {
   index_map[node] = index;
   low_link_map[node] = index;
   index += 1;
   stack.push(node);
   on_stack[node] = true;
-  
+
   for (const auto& neighbor : nodes_[node]) {
     if (index_map.find(neighbor) == index_map.end()) {
-      strongConnect(neighbor, index, index_map, low_link_map, on_stack, stack, res);
+      strongConnect(neighbor, index, index_map, low_link_map, on_stack, stack,
+                    res);
       low_link_map[node] = std::min(low_link_map[node], low_link_map[neighbor]);
     } else if (on_stack[neighbor]) {
       low_link_map[node] = std::min(low_link_map[node], index_map[neighbor]);
     }
   }
-  
+
   if (low_link_map[node] == index_map[node]) {
     vector<string> component;
     auto to_check = stack.top();
