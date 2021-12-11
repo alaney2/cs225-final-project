@@ -76,16 +76,15 @@ void Graph::strongConnect(const string& node,
   
   if (low_link_map[node] == index_map[node]) {
     vector<string> component;
-    while (!stack.empty()) {
-      const auto& to_check = stack.top();
+    auto to_check = stack.top();
+    while (to_check != node) {
+      to_check = stack.top();
       stack.pop();
       on_stack[to_check] = false;
       component.push_back(to_check);
-      if (to_check != node) {
-        res.insert(component);
-        component.clear();
-      }
     }
+    res.insert(component);
+    component.clear();
   }
 }
 

@@ -4,6 +4,7 @@
 #include "../include/graph.h"
 
 #include <algorithm>
+#include <iostream>
 
 #include "../catch/catch.hpp"
 
@@ -237,4 +238,12 @@ TEST_CASE("tarjan") {
   Graph graph("tests/test_data/test_data5.txt");
   graph.setRoot("google.com");
   graph.printInfo();
+  const auto& res = graph.tarjan();
+  for (const auto& v : res) {
+    std::cout << "Component: " << std::endl;
+    for (const auto& s : v) {
+      std::cout << s << ", ";
+    }
+    std::cout << std::endl << std::endl;
+  }
 }
