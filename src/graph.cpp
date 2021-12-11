@@ -6,13 +6,10 @@
 #include <iostream>
 #include <numeric>
 #include <stdexcept>
-#include <unordered_set>
-#include <vector>
 
 using std::cout;
 using std::endl;
 using std::ifstream;
-using std::unordered_set;
 
 Graph::Graph(const string& filename) : Graph(vector<string>{filename}) {}
 
@@ -36,13 +33,13 @@ Graph::Graph(const vector<string>& filenames) {
   }
 }
 
-unordered_set<vector<string>> Graph::tarjan() {
+set<vector<string>> Graph::tarjan() {
   size_t index = 0;
   unordered_map<string, size_t> index_map;
   unordered_map<string, size_t> low_link_map;
   unordered_map<string, bool> on_stack;
 //  
-  unordered_set<vector<string>> res;
+  set<vector<string>> res;
 //  
   stack<string> s;
   
@@ -61,7 +58,7 @@ void Graph::strongConnect(const string& node,
                           unordered_map<string, size_t>& low_link_map,
                           unordered_map<string, bool>& on_stack,
                           stack<string>& stack,
-                          unordered_set<vector<string>>& res) {
+                          set<vector<string>>& res) {
   index_map[node] = index;
   low_link_map[node] = index;
   index += 1;

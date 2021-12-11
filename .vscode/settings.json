@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "*.env.local": "env",
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "unordered_set": "cpp"
   }
 }
