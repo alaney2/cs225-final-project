@@ -53,3 +53,7 @@ Implement graph class - data processing Makefile, test cases: catch
   k-norm difference of the current vector with the previous vector is less than some bound.
 
 #### Tarjan's Algorithm
+
+### Main executable
+
+- Created a graph object with the original dataset and called on algorithms that we have implemented. Output each final result.
