@@ -8,12 +8,14 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include <set>
 
 using std::stack;
 using std::string;
 using std::unordered_map;
 using std::unordered_set;
 using std::vector;
+using std::set;
 
 class Graph {
  public:
@@ -124,7 +126,7 @@ class Graph {
    * 
    * @return set of strongly connected components (sets of vertices)
    */
-  unordered_set<vector<string>> tarjan();
+  set<vector<string>> tarjan();
   
   /**
    * Set the depth index for node to the smallest unused index
@@ -141,7 +143,7 @@ class Graph {
                      unordered_map<string, size_t>& low_link_map,
                      unordered_map<string, bool>& on_stack,
                      stack<string>& stack,
-                     unordered_set<vector<string>>& res);
+                     set<vector<string>>& res);
   
 
  private:
