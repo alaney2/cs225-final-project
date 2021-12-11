@@ -11,38 +11,27 @@ int main(int argc, char* argv[]) {
 
   Graph g = Graph(data_files);
   g.setRoot("https://courses.engr.illinois.edu/cs225/fa2021");
-//  auto res = g.dfs();
-//  cout << res.size() << endl;
+
+  vector<string> vdfs = g.dfs();
+  cout << "DFS Traversal:"<<endl;
+  for(auto &a : vdfs){
+    cout << a << " -> ";
+  }
+  cout << endl; cout << endl;
+
+  cout << "Algorithm #1: PageRank" << endl;
+  int idx = 1;
   const auto& page_rank_res = g.pageRank();
   for (size_t i = 0; i < 50; ++i) {
-    cout << page_rank_res[i] << ", ";
+    if(page_rank_res[i] == "") continue;
+    cout << idx << ": " << page_rank_res[i] << endl;
+    idx ++;
   }
   cout << endl;
 
-  // string root = g.getRoot();
-  // cout << "root-- " << root << endl;
-  // vector<string> n = g.getNeighbor(root);
-  // for (const auto& i : n) {
-  //   cout << i << " || ";
-  // }
-  // cout << endl << endl;
+  cout << "Algorithm #2: Tarjan's Strongly Connect Component Algorithm" <<endl;
 
-  // Error in current parser: main nodes don't include end slash but in the
-  // neighbor list they do
 
-  // while (true) {
-  //   string search = "";
-  //   cout << "Enter new url: " << endl;
-  //   cin >> search;
-  //   cout << "Your Search: " << search << endl;
-  //   vector<string> n2 = g.getNeighbor(search);
-  //   for (auto i : n2) {
-  //     cout << i << " || ";
-  //   }
-  //   cout << endl;
-  // }
-//  Graph g1 = Graph("test.txt");
-//  g1.dfs();
 
   return 0;
 }
