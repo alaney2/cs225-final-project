@@ -232,3 +232,9 @@ TEST_CASE("Page Tests") {
     }
   }
 }
+
+TEST_CASE("tarjan") {
+  Graph graph("tests/test_data/test_data5.txt");
+  graph.setRoot("google.com");
+  graph.printInfo();
+}

@@ -36,6 +36,62 @@ Graph::Graph(const vector<string>& filenames) {
   }
 }
 
+unordered_set<vector<string>> Graph::tarjan() {
+  size_t index = 0;
+  unordered_map<string, size_t> index_map;
+  unordered_map<string, size_t> low_link_map;
+  unordered_map<string, bool> on_stack;
+//  
+  unordered_set<vector<string>> res;
+//  
+  stack<string> s;
+  
+  for (const auto& node : all_nodes_) {
+    if (index_map.find(node) == index_map.end()) {
+      strongConnect(node, index, index_map, low_link_map, on_stack, s, res);
+    }
+  }
+  
+  return res;
+}
+
+void Graph::strongConnect(const string& node,
+                          size_t& index,
+                          unordered_map<string, size_t>& index_map,
+                          unordered_map<string, size_t>& low_link_map,
+                          unordered_map<string, bool>& on_stack,
+                          stack<string>& stack,
+                          unordered_set<vector<string>>& res) {
+  index_map[node] = index;
+  low_link_map[node] = index;
+  index += 1;
+  stack.push(node);
+  on_stack[node] = true;
+  
+  for (const auto& neighbor : nodes_[node]) {
+    if (index_map.find(neighbor) == index_map.end()) {
+      strongConnect(neighbor, index, index_map, low_link_map, on_stack, stack, res);
+      low_link_map[node] = std::min(low_link_map[node], low_link_map[neighbor]);
+    } else if (on_stack[neighbor]) {
+      low_link_map[node] = std::min(low_link_map[node], index_map[neighbor]);
+    }
+  }
+  
+  if (low_link_map[node] == index_map[node]) {
+    vector<string> component;
+    while (!stack.empty()) {
+      const auto& to_check = stack.top();
+      stack.pop();
+      on_stack[to_check] = false;
+      component.push_back(to_check);
+      if (to_check != node) {
+        res.insert(component);
+        component.clear();
+      }
+    }
+  }
+}
+
 void Graph::addFileInfoToGraph(const string& filename) {
   string line;
   ifstream file(filename);
@@ -95,6 +151,7 @@ void Graph::printInfo() {
   }
   cout << "Total Nodes_: " << nodes_.size() << endl;
 }
+
 void Graph::setRoot(const string& new_root_) { root_ = new_root_; }
 
 vector<string> Graph::dfs() {
