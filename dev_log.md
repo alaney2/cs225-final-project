@@ -54,6 +54,6 @@ Implement graph class - data processing Makefile, test cases: catch
 
 #### Tarjan's Algorithm
 
-### Main executable
+#### Main executable
 
 - Created a graph object with the original dataset and called on algorithms that we have implemented. Output each final result.
