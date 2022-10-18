@@ -8,7 +8,10 @@ Google Slide: https://docs.google.com/presentation/d/1qv6jcppam3MxcP-Yi3mN6KSEqY
 Visualization: https://225-site-graph.benclarage.com/
 
 alaney2 - Alan Yao
+
 clarage2 - Ben Clarage
+
 alvinjz2 - Alvin Zhang
+
 youyouy2 - Youyou Yu
 ![Graph Visualization](/Visualization.png "Graph visualization")
